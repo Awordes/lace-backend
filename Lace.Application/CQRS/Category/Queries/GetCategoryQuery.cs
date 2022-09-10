@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
-using Lace.Application.CQRS.User.ViewModels;
+using Lace.Application.CQRS.Category.ViewModels;
 using Lace.Application.DbContexts;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Lace.Application.CQRS.User.Queries;
+namespace Lace.Application.CQRS.Category.Queries;
 
-public class GetUserQuery: IRequest<UserViewModel>
+public class GetCategoryQuery: IRequest<CategoryViewModel>
 {
     public Guid Id { get; set; }
     
-    private class Handler: IRequestHandler<GetUserQuery, UserViewModel>
+    private class Handler: IRequestHandler<GetCategoryQuery, CategoryViewModel>
     {
         private readonly ILogger<Handler> _logger;
         private readonly IMapper _mapper;
@@ -24,14 +24,16 @@ public class GetUserQuery: IRequest<UserViewModel>
             _contextFactory = contextFactory;
         }
 
-        public async Task<UserViewModel> Handle(GetUserQuery request, CancellationToken cancellationToken)
+        public async Task<CategoryViewModel> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-                var user = await context.Users.AsNoTracking()
+                var category = await context.Categories.AsNoTracking()
+                    .Include(x => x.DictionaryElements)
                     .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
-                return _mapper.Map<UserViewModel>(user);
+
+                return _mapper.Map<CategoryViewModel>(category);
             }
             catch (Exception e)
             {

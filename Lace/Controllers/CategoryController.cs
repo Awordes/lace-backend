@@ -1,16 +1,15 @@
-﻿using Lace.Application.CQRS.Category.Queries;
-using Lace.Application.CQRS.User.Commands;
-using Lace.Application.CQRS.User.Queries;
-using Lace.Application.CQRS.User.ViewModels;
+﻿using Lace.Application.CQRS.Category.Commands;
+using Lace.Application.CQRS.Category.Queries;
+using Lace.Application.CQRS.Category.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lace.Controllers;
 
-public class UserController: LaceController
+public class CategoryController: LaceController
 {
     [HttpPost("/[controller]")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> Create(CreateUserCommand command)
+    public async Task<IActionResult> Create(CreateCategoryCommand command)
     {
         try
         {
@@ -25,11 +24,11 @@ public class UserController: LaceController
 
     [HttpGet("/[controller]/{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<UserViewModel>> Get(Guid id)
+    public async Task<ActionResult<CategoryViewModel>> Get(Guid id)
     {
         try
         {
-            return Ok(await Mediator.Send(new GetUserQuery { Id = id }));
+            return Ok(await Mediator.Send(new GetCategoryQuery { Id = id }));
         }
         catch (Exception e)
         {
@@ -37,18 +36,13 @@ public class UserController: LaceController
         }
     }
 
-    [HttpGet]
+    [HttpGet("/[controller]")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<UserViewModel>> Authorize([FromQuery] AuthorizeUserQuery query)
+    public async Task<ActionResult<CategoryListViewModel>> GetList([FromQuery] GetCategoriesQuery query)
     {
         try
         {
-            var result = await Mediator.Send(query);
-            
-            if (result is not null)
-                return Ok(result);
-            
-            return Unauthorized();
+            return Ok(await Mediator.Send(query));
         }
         catch (Exception e)
         {

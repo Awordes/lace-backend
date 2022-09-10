@@ -8,11 +8,11 @@ public class ProfileController: LaceController
 {
     [HttpGet("/[controller]/{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<ProfileViewModel>> Get(Guid Id)
+    public async Task<ActionResult<ProfileViewModel>> Get(Guid id, [FromQuery] Guid authorizedUserId)
     {
         try
         {
-            return Ok(await Mediator.Send(new GetProfileQuery { Id = Id }));
+            return Ok(await Mediator.Send(new GetProfileQuery { Id = id, AuthorizedUserId = authorizedUserId }));
         }
         catch (Exception e)
         {
@@ -30,7 +30,7 @@ public class ProfileController: LaceController
         }
         catch (Exception e)
         {
-            return BadRequest(e);
+            return BadRequest(e.Message);
         }
     }
 }
