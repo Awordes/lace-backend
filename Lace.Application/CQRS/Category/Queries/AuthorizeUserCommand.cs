@@ -7,13 +7,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Lace.Application.CQRS.Category.Queries;
 
-public class AuthorizeUserQuery: IRequest<UserViewModel>
+public class AuthorizeUserCommand: IRequest<UserViewModel>
 {
     public string Login { get; set; }
 
     public string Password { get; set; }
     
-    private class Handler: IRequestHandler<AuthorizeUserQuery, UserViewModel>
+    private class Handler: IRequestHandler<AuthorizeUserCommand, UserViewModel>
     {
         private readonly ILogger<Handler> _logger;
         private readonly IDbContextFactory<LaceDbContext> _contextFactory;
@@ -26,7 +26,7 @@ public class AuthorizeUserQuery: IRequest<UserViewModel>
             _mapper = mapper;
         }
 
-        public async Task<UserViewModel> Handle(AuthorizeUserQuery request, CancellationToken cancellationToken)
+        public async Task<UserViewModel> Handle(AuthorizeUserCommand request, CancellationToken cancellationToken)
         {
             try
             {

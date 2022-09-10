@@ -11,6 +11,10 @@ public class GetProfilesQuery: IRequest<ProfileListViewModel>
 {
     public string? FirstName { get; set; }
     
+    public Guid? DictionaryElementId { get; set; }
+
+    public string? ExternalValue { get; set; }
+    
     private class Handler: IRequestHandler<GetProfilesQuery, ProfileListViewModel>
     {
         private readonly ILogger<Handler> _logger;
@@ -34,6 +38,17 @@ public class GetProfilesQuery: IRequest<ProfileListViewModel>
 
                 if (request.FirstName is not null)
                     query = query.Where(x => x.Name.Contains(request.FirstName));
+
+                if (request.DictionaryElementId is not null)
+                    query = query
+                        .Include(x => x.ProfileAttributes)
+                        .ThenInclude(x => x.DictionaryElement)
+                        .Where(x => x.ProfileAttributes.Any(y =>
+                            y.DictionaryElement.Id == request.DictionaryElementId));
+                else if (request.ExternalValue is not null)
+                    query = query
+                        .Include(x => x.ProfileAttributes)
+                        .Where(x => x.ProfileAttributes.Any(y => y.ExternalValue == request.ExternalValue));
 
                 var users = await query.ToListAsync(cancellationToken);
                 

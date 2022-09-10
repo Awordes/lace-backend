@@ -37,13 +37,13 @@ public class UserController: LaceController
         }
     }
 
-    [HttpGet]
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<UserViewModel>> Authorize([FromQuery] AuthorizeUserQuery query)
+    public async Task<ActionResult<UserViewModel>> Authorize(AuthorizeUserCommand command)
     {
         try
         {
-            var result = await Mediator.Send(query);
+            var result = await Mediator.Send(command);
             
             if (result is not null)
                 return Ok(result);

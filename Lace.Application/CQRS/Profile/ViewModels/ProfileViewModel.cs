@@ -11,7 +11,9 @@ public class ProfileViewModel: IMapFrom<Domain.Entities.Profile>
 
     public string Surname { get; set; }
 
-    public string Email { get; set; }
+    public string? Email { get; set; }
+
+    public string? Telegram { get; set; }
 
     public ICollection<ProfileAttributeViewModel> ProfileAttributes { get; set; }
 
