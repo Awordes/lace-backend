@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace", "Lace\Lace.csproj", "{24F151EB-EC66-46B0-B39B-28048C3F5373}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain", "Lace.Domain\Lace.Domain.csproj", "{EF9D4893-EA6D-4846-BE22-748671B927C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Application", "Lace.Application\Lace.Application.csproj", "{FC382AAB-3A96-419E-A6E4-AF1CA7625697}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24F151EB-EC66-46B0-B39B-28048C3F5373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24F151EB-EC66-46B0-B39B-28048C3F5373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24F151EB-EC66-46B0-B39B-28048C3F5373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24F151EB-EC66-46B0-B39B-28048C3F5373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF9D4893-EA6D-4846-BE22-748671B927C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF9D4893-EA6D-4846-BE22-748671B927C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF9D4893-EA6D-4846-BE22-748671B927C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF9D4893-EA6D-4846-BE22-748671B927C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC382AAB-3A96-419E-A6E4-AF1CA7625697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC382AAB-3A96-419E-A6E4-AF1CA7625697}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC382AAB-3A96-419E-A6E4-AF1CA7625697}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC382AAB-3A96-419E-A6E4-AF1CA7625697}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
