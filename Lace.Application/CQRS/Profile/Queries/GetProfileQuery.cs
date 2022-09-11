@@ -53,7 +53,19 @@ public class GetProfileQuery: IRequest<ProfileViewModel>
                     foreach (var profileAttribute in currentUserProfile.ProfileAttributes)
                     {
                         if (profile.ProfileAttributes.Any(x =>
-                                x.DictionaryElement.Id == profileAttribute.DictionaryElement.Id))
+                                {
+                                    if (x.DictionaryElement is not null)
+                                    {
+                                        if (profileAttribute.DictionaryElement is not null)
+                                            return x.DictionaryElement.Id == profileAttribute.DictionaryElement.Id;
+                                    }
+                                    else if (x.ExternalValue is not null)
+                                        if (profileAttribute.ExternalValue is not null)
+                                            return profileAttribute.ExternalValue == x.ExternalValue;
+
+                                    return false;
+                                }
+                                ))
                         {
                             profileViewModel.ProfileLaces.Add(new ProfileLaceViewModel
                             {

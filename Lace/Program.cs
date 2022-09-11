@@ -38,6 +38,14 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lace v1");
 });
 
+app.UseCors(builder =>
+    builder.WithOrigins(
+            "http://localhost:8080",
+            "http://lace-backend:80")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials());
+
 app.UseRouting();
 
 app.UseEndpoints(endpoints =>

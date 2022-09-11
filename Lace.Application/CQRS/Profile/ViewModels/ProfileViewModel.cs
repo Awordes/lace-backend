@@ -18,4 +18,6 @@ public class ProfileViewModel: IMapFrom<Domain.Entities.Profile>
     public ICollection<ProfileAttributeViewModel> ProfileAttributes { get; set; }
 
     public ICollection<ProfileLaceViewModel> ProfileLaces { get; set; }
+
+    public RandomLaceViewModel RandomLace { get; set; }
 }

@@ -8,7 +8,7 @@ public class ProfileAttribute
 
     public Category Category { get; set; }
 
-    public DictionaryElement DictionaryElement { get; set; }
+    public DictionaryElement? DictionaryElement { get; set; }
 
     public string? ExternalValue { get; set; }
 }

@@ -29,7 +29,8 @@ public class GetCategoriesQuery: IRequest<CategoryListViewModel>
             try
             {
                 var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-                var categories = await context.Categories.AsNoTracking().ToListAsync(cancellationToken);
+                var categories = await context.Categories.AsNoTracking()
+                    .Include(x => x.DictionaryElements).ToListAsync(cancellationToken);
                 return new CategoryListViewModel
                 {
                     Categories = categories.Select(x => _mapper.Map<CategoryViewModel>(x)).ToList()
